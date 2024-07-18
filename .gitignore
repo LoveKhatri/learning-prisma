@@ -1,5 +1,8 @@
 # Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 
+prisma/dev.db
+.db
+
 # Logs
 
 logs
