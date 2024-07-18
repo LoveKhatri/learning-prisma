@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  // @id -> Primary Key
+  // @default(autoincrement()) -> Autoincrements the value by 1 for every new document inserted
+  id Int @id @default(autoincrement())
+
+  // @unique -> Unique constraint, each value in this column must be unique
+  email String @unique
+
+  // String? -> Optional field, 
+  // ? -> is what makes any field optional
+  name String?
+
+  // Containes a bunch of Article OBJECTS
+  articles Article[]
+}
+
+model Article {
+  // This is the ID of Article
+  id    Int     @id @default(autoincrement())
+  title String
+  body  String?
+
+  // The authorId is same as User.id
+  authorId Int
+  // This is a new field which contains an entire User Object
+  // This is mapped from Article.authorId == User.id
+  author   User @relation(fields: [authorId], references: [id])
+}
