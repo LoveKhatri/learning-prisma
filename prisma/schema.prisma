@@ -36,5 +36,5 @@ model Article {
   authorId Int
   // This is a new field which contains an entire User Object
   // This is mapped from Article.authorId == User.id
-  author   User @relation(fields: [authorId], references: [id])
+  author   User @relation(fields: [authorId], references: [id], onDelete: Cascade)
 }
